@@ -44,7 +44,7 @@ class UserModal extends Component {
             return false;
         }
         axios
-            .put("http://localhost:9000/api/users/update", this.state)
+            .put("http://192.168.1.11:9000/api/users/update", this.state)
             .then(result => {
                 localStorage.setItem("user", JSON.stringify(result.data.updatedData));
                 if (result.data.success) NotificationManager.success(result.data.msg);

@@ -26,7 +26,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `http://localhost:9000/api/users/allowLogin/${id}`,
+        `http://192.168.1.11:9000/api/users/allowLogin/${id}`,
         {},
         {
           headers: {
@@ -50,7 +50,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
     axios
       .delete(
-        `http://localhost:9000/api/users/allowLogin/${id}`,
+        `http://192.168.1.11:9000/api/users/allowLogin/${id}`,
         {
           headers: {
             Authorization: token,
@@ -73,7 +73,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
     
     axios
-      .get("http://localhost:9000/api/users/userlist", {
+      .get("http://192.168.1.11:9000/api/users/userlist", {
         headers: {
           Authorization: token,
         },

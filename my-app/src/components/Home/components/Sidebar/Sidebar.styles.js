@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+//p = props
 export const SidebarContainer = styled.div`
   width: ${p => p.isSidebarOpen ? '23%' : '6%'};
   max-width: 280px;

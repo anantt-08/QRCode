@@ -33,13 +33,21 @@ class Home extends Component {
         <>
     <ScrollToTop />
         <div className="container">
-          <div className="card" >
+          <div className="card" style={{background:"#ecf0f1"}}>
             <div className="card-body">
-              <h5 className="card-title">WelCome {this.props.name}</h5>
-              <p className="card-text">Email :{this.props.email}</p>
+             <div style={{display:"flex", flexWrap: "wrap" , justifyContent:"space-between", textDecoration: "underline",textDecorationColor:"brown"}}>
+              <h5 className="card-title"><span style={{color:"red"}}>WElCOME</span> {this.props.name}</h5>
+              <p className="card-title" style={{color:"black",fontSize:"20px"}}><span style={{color:"red"}}>Email: </span>{this.props.email}</p>
+              </div>
+             <div style={{display:"flex", flexWrap: "wrap" , justifyContent:"space-between"}}>
               <UserModal />
+              <div >
               <Homepage id={this.props.id} name={this.props.name} />
-              <Card className="mt-2 col-6">
+              </div>
+              </div>
+              <br />
+              <br />
+               <Card className="mt-2 col-6" style={{position:"absolute",top:"49px"}}>
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
@@ -47,7 +55,7 @@ class Home extends Component {
                     </Col>
                   </Row>
                 </CardHeader>
-                <CardBody style={{background:"rgb(224, 224, 209)"}}>
+                <CardBody >
                   <Form>
                     <h6 className="heading-small text-muted mb-4">
                       Relative Information

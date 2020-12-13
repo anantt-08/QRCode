@@ -6,7 +6,9 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-
+import * as s from './App.styles';
+import Sidebar from '../Home/components/Sidebar/Sidebar';
+import * as Palette from '../Home/colors';
 import { Link } from 'react-router-dom';
 
 const AdminPage = () => {
@@ -15,7 +17,7 @@ const AdminPage = () => {
    const [showW, setShowW] = useState(false);
    const [User,setUser] = useState(null);
    const [Loading,setLoading]=useState(false);
- 
+   const [colorr,setcolorr]=useState("preDark");
   const handleCloseW = () => {setShowW(false); setUser(null)};
   const handleShowW = (user) => {setShowW(true); setUser(user)};
    const handleClose = () => {setShow(false); setUser(null)};
@@ -26,7 +28,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `http://192.168.1.11:9000/api/users/allowLogin/${id}`,
+        `http://localhost:9000/api/users/allowLogin/${id}`,
         {},
         {
           headers: {
@@ -50,7 +52,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
     axios
       .delete(
-        `http://192.168.1.11:9000/api/users/allowLogin/${id}`,
+        `http://localhost:9000/api/users/allowLogin/${id}`,
         {
           headers: {
             Authorization: token,
@@ -73,7 +75,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
     
     axios
-      .get("http://192.168.1.11:9000/api/users/userlist", {
+      .get("http://localhost:9000/api/users/userlist", {
         headers: {
           Authorization: token,
         },
@@ -86,16 +88,36 @@ const AdminPage = () => {
       });
   }, []);
   
+     const backgroundImage = 'images/mountain.jpg';
+  const sidebarHeader = {
+    fullName: 'DASHBOARD',
+    shortName: ':)'
+  };
+  const menuItems = [
+    {name: 'Home', to: '/home', icon: '/icons/home.svg' },
+    {name: 'Scan', to: '/admin/scan', icon: '/icons/about.svg'},
+    {name: 'User List', to: '/admin/users', icon: '/icons/blog.svg',  },
+    {name: 'Pending REQ', to: '/admin/admin', icon: '/icons/destinations.svg' }
+  ];
+
+  const fonts = {
+    header: 'ZCOOL KuaiLe',
+    menu: 'Poppins'
+  }
     return(
       <>
- 
-      <NotificationContainer />
-      <h1 className="text-center pt-4">Pending Request's</h1>
-      { Loading ? <div></div> : <div  style={{display: 'flex', justifyContent: 'center'}} > 
-       <Spinner animation="border" variant="danger" size="xl" />
-       </div>
-     }
-      <div className="p-4">
+       <NotificationContainer />
+         <s.App>
+      <Sidebar
+        backgroundImage={backgroundImage}
+        sidebarHeader={sidebarHeader}
+        menuItems={menuItems}
+        fonts={fonts}
+        colorPalette={Palette[`${colorr}`]
+      }
+       SELECTED="Pending REQ"
+      />  
+      <div className="p-4" style={{width:"100%"}}>
         <MDBTable className="py-3" hover>
           <MDBTableHead color="primary-color" textWhite>
             <tr>
@@ -106,6 +128,16 @@ const AdminPage = () => {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
+          { Loading ? <div></div> : <div  style={{display: 'flex',marrginLeft:"90%",justifyContent: 'center'}} > 
+       <Spinner animation="border" variant="danger" size="xl" />{ Loading ? <div></div> : <div  style={{display: 'flex',marrginLeft:"70%",justifyContent: 'center'}} > 
+       <Spinner animation="border" variant="danger" size="xl" />
+       </div>
+     }{ Loading ? <div></div> : <div  style={{display: 'flex',marrginLeft:"80%",justifyContent: 'center'}} > 
+       <Spinner animation="border" variant="danger" size="xl" />
+       </div>
+     }
+       </div>
+     }
             {userlist &&
               userlist.map((user, i) => (
                 <tr key={user._id}>
@@ -117,6 +149,7 @@ const AdminPage = () => {
                       <MDBBtn
                         color="success"
                         size="sm"
+                        style={{width:"127px"}}
                         onClick={() => handleShowW(user._id)}
                       >
                         Allow
@@ -125,6 +158,7 @@ const AdminPage = () => {
                       <MDBBtn
                         color="warning"
                         size="sm"
+                        style={{width:"127px"}}
                         onClick={() => handleShow(user._id) }
                       >
                         DisAllow
@@ -133,9 +167,39 @@ const AdminPage = () => {
                                       </td>
                 </tr>
               ))}
+
           </MDBTableBody>
         </MDBTable>
-        <Modal
+        </div>
+         <div style={{postion:"absolute",zIndex:"1",
+ gridGap:" 0px" , 
+  gridTemplateRows: "50px 50px 50px 50px 50px" ,  display:"inline-grid",bottom:"40px",top:"0px",}}>
+    <MDBBtn color="cyan" type="button" onClick={()=>{
+      setcolorr("pinkAndBlue")}
+     } >
+      </MDBBtn>
+      <MDBBtn color="green" type="button" onClick={()=>{
+      setcolorr("swampy")}
+     } >
+      </MDBBtn>
+      <MDBBtn color="blue" type="button" onClick={()=>{
+      setcolorr("silver")}
+     } >
+                  
+                  </MDBBtn>
+          <MDBBtn color="pink" type="button" onClick={()=>{
+      setcolorr("dejaVu")}
+     } >
+                  
+                  </MDBBtn>
+      <MDBBtn color="brown" type="button" onClick={()=>{
+      setcolorr("brown")}
+     } >
+                  
+                  </MDBBtn>  
+                  </div>  
+    </s.App>     
+    <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"
@@ -173,7 +237,6 @@ const AdminPage = () => {
           <Button variant="success" onClick={()=>{ handleAllow(); handleCloseW() } }>Yess</Button>
         </Modal.Footer>
       </Modal>
-      </div>
     </> 
   )
 }

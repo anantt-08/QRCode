@@ -28,7 +28,7 @@ class Login extends Component {
     }
     const data = { email: this.state.email, password: this.state.password };
     axios
-      .post("http://192.168.1.11:9000/api/users/login", data)
+      .post("http://localhost:9000/api/users/login", data)
       .then((result) => {
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("user", JSON.stringify(result.data.user));

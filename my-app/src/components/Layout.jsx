@@ -28,7 +28,7 @@ function Layout(props) {
           {props.loggedIn ? (
             <Fragment>
               <ul className="navbar-nav mr-auto" style={{color: "white"}}>
-                {"<-- HOME"}
+                QRCode
 
                               </ul>
               <ul className="navbar-nav ml-auto">

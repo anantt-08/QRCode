@@ -23,25 +23,18 @@ const Sidebar = props => {
       dividerColor: 'rgba(122, 204, 178)',
       selectedBackgroundCollapsedMode: 'dark'
     }
+    ,
+    SELECTED=""
   } = props;
 
   // State
-  const [selected, setSelectedMenuItem] = useState(menuItems[0].name);
+  const [selected, setSelectedMenuItem] = useState(SELECTED);
   const [isSidebarOpen, setSidebarState] = useState(true);
   const [header, setHeader] = useState(sidebarHeader.fullName);
   // Effects
 
   // Set selected menu item based on URL pathname
-  useLayoutEffect(() => {
-    const path = window.location.pathname;
-    const parts = path.split('/');
-
-    if (path !== '/' && parts[1].charAt(0).toUpperCase() !== menuItems[0].name) {
-      const selectedItem = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
-      setSelectedMenuItem(selectedItem)
-    }
-  }, [menuItems])
-
+  
   // Update of header state
   useEffect(() => {
     isSidebarOpen ? setTimeout(() => setHeader(sidebarHeader.fullName), 200) : setHeader(sidebarHeader.shortName);

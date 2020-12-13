@@ -41,7 +41,8 @@ class UserHeader extends React.Component {
         sidebarHeader={sidebarHeader}
         menuItems={menuItems}
         fonts={fonts}
-        colorPalette={Palette[`${this.state.colorr}`]}
+        colorPalette={Palette[`${this.state.colorr}`]      }
+        SELECTED="Home"
       />  
 
       <MainView />

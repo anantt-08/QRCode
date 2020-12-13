@@ -9,6 +9,11 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import { MDBBtn
+} from "mdbreact";
+import * as s from './App.styles';
+import Sidebar from '../Home/components/Sidebar/Sidebar';
+import * as Palette from '../Home/colors'
 import { FaRegTrashAlt } from "react-icons/fa";
 import Fab from "@material-ui/core/Fab";
 import BootstrapTable from "react-bootstrap-table-next";
@@ -21,13 +26,14 @@ export default class Userlist extends Component<any, any> {
     this.state = {
       DATA: [],
       loading: false,
+         colorr:"preDark"
     };
   }
 
   componentWillMount() {
     const token = localStorage.getItem("token");
     axios
-      .get("http://192.168.1.11:9000/api/users/userlistt", {
+      .get("http://localhost:9000/api/users/userlistt", {
         headers: {
           Authorization: token,
         },
@@ -58,6 +64,23 @@ export default class Userlist extends Component<any, any> {
   };
 
   render() {
+
+     const backgroundImage = 'images/mountain.jpg';
+  const sidebarHeader = {
+    fullName: 'DASHBOARD',
+    shortName: ':)'
+  };
+  const menuItems = [
+    {name: 'Home', to: '/home', icon: '/icons/home.svg' },
+    {name: 'Scan', to: '/admin/scan', icon: '/icons/about.svg'},
+    {name: 'User List', to: '/admin/users', icon: '/icons/blog.svg',  },
+    {name: 'Pending REQ', to: '/admin/admin', icon: '/icons/destinations.svg' }
+  ];
+
+  const fonts = {
+    header: 'ZCOOL KuaiLe',
+    menu: 'Poppins'
+  }
     const columns = [
       {
         dataField: "_id",
@@ -97,7 +120,7 @@ export default class Userlist extends Component<any, any> {
             <QRCode
               id={row._id}
               value={JSON.stringify(row._id)}
-              size={500}
+              size={100}
               level={"H"}
               includeMargin={true}
             />
@@ -157,17 +180,41 @@ export default class Userlist extends Component<any, any> {
         ),
       },
     ];
+
+    const pagination = paginationFactory({
+  sizePerPage:3,
+ sizePerPageList : [ {
+  text: '3', value: 3
+}, {
+  text: '6', value: 6
+},
+{text: '10', value: 10
+}
+ ]
+
+});
+
     //  this.componentWillMount();
     return (
       <>
         <NotificationContainer />
-        <div>
+         <s.App>
+      <Sidebar
+        backgroundImage={backgroundImage}
+        sidebarHeader={sidebarHeader}
+        menuItems={menuItems}
+        fonts={fonts}
+        colorPalette={Palette[`${this.state.colorr}`]      }
+       SELECTED="User List"
+      />  
+        <div style={{width:"100%", background: "#ecf0f1"}}>
           <Container className="mt-3">
             {this.state.loading ? (
               <div></div>
             ) : (
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Spinner animation="border" variant="danger" size="xl" />
+                  <Spinner animation="border" variant="danger" size="xl" />  <Spinner animation="border" variant="danger" size="xl" />
               </div>
             )}
             <Tabs defaultActiveKey="view" id="uncontrolled-tab-example">
@@ -177,7 +224,8 @@ export default class Userlist extends Component<any, any> {
                   data={this.state.DATA}
                   columns={columns}
                   hovers
-                  pagination={paginationFactory()}
+                  pagination={pagination}
+
                 />
               </Tab>
             </Tabs>
@@ -188,6 +236,35 @@ export default class Userlist extends Component<any, any> {
             />
           </Container>
         </div>
+         <div style={{postion:"absolute",zIndex:"1",
+ gridGap:" 0px" ,
+  gridTemplateRows: "50px 50px 50px 50px 50px" ,  display:"inline-grid",bottom:"40px",top:"0px",}}>
+    <MDBBtn color="cyan" type="button" onClick={()=>{
+      this.setState({colorr:"pinkAndBlue"})}
+     } >
+      </MDBBtn>
+      <MDBBtn color="green" type="button" onClick={()=>{
+      this.setState({colorr:"swampy"})}
+     } >
+      </MDBBtn>
+      <MDBBtn color="blue" type="button" onClick={()=>{
+      this.setState({colorr:"silver"})}
+     } >
+                  
+                  </MDBBtn>
+          <MDBBtn color="pink" type="button" onClick={()=>{
+      this.setState({colorr:"dejaVu"})}
+     } >
+                  
+                  </MDBBtn>
+      <MDBBtn color="brown" type="button" onClick={()=>{
+      this.setState({colorr:"brown"})}
+     } >
+                  
+                  </MDBBtn>  
+                  </div>  
+ 
+       </s.App>  
       </>
     );
   }

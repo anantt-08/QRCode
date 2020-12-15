@@ -4,14 +4,12 @@ import { connect } from "react-redux";
 import UserModal from './userModal';
 import Homepage from "./userpage";
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
   FormGroup,
   Form,
   Input,
-  Container,
   Row,
   Col
 } from "reactstrap";
@@ -47,7 +45,7 @@ class Home extends Component {
               </div>
               <br />
               <br />
-               <Card className="mt-2 col-6" style={{position:"absolute",top:"49px"}}>
+               <Card className="mt-2 col-6" style={{position:"absolute",top:"127px"}}>
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
                     <Col xs="8">

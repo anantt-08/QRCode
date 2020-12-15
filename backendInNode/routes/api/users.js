@@ -151,6 +151,35 @@ router.get("/profile", authenticate.verifyUser, (req, res) => {
         user: req.user,
     });
 });
+
+router.get(
+    "/find/:result",
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    function (req, res) {
+        User.findById(req.params.result, function (err, User) {
+            if (err) return  res.status(404).json({
+                success: false,
+                msg: "User Not Found",
+            });     
+            if(User == null) {
+               return res.status(404).json({
+                success: false,
+                msg: "User Not Found",
+            });     
+            }
+            else{
+                return res.status(200).json({
+                success: true,
+                msg: "Listed",
+                userlist: User,
+            });
+            }
+        });
+    }
+);
+
+
 router.post("/reset", function (req, res) {
     User.findOne({ email: req.body.email }, function (error, userData) {
         if (userData == null) {
@@ -242,7 +271,7 @@ router.put(
                         msg: "Something went wrong",
                     });
                 }
-       /*     var transporter = nodemailer.createTransport({
+            var transporter = nodemailer.createTransport({
             service: "gmail",
             secure: false, // true for 465, false for other ports
             auth: {
@@ -273,7 +302,7 @@ router.put(
             } else {
                 console.log("Email sent: " + info.response);
             }
-           });*/
+           });
          return res.status(200).json({
                         success: true,
                         msg: "QR CODE Generated!",

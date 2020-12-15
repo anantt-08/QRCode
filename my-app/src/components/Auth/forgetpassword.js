@@ -41,6 +41,14 @@ export default class forgetpassword extends Component {
     }
     render() {
         return (
+          <div  style={{
+            width:"100%",
+            backgroundImage:
+              "url(" + require("./cover.jpg") + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "center top"
+          }}>>
+
             <div className="content">
                 <NotificationContainer />
                 <form onSubmit={this.handleForm}>
@@ -54,7 +62,7 @@ export default class forgetpassword extends Component {
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
                 <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
-                  Forget Password? 
+                  Forgot Password? 
                                  </h3>
               </MDBRow>
             </div>
@@ -81,6 +89,7 @@ export default class forgetpassword extends Component {
                         <div className="col-sm-1 col-md-3"></div>
                     </div>
                 </form>
+            </div>
             </div>
         )
     }

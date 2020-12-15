@@ -1,14 +1,9 @@
 import React from "react";
- import { Link } from 'react-router-dom';
 import {  Container, Row, Col } from "reactstrap";
-import { MDBBtn
-} from "mdbreact";
 import UserModal from '../Home/userModal';
+import "./userpage.css";
 
 class UserPage extends React.Component {
-   constructor ( props ) {
-        super( props );
-      }
   render() {
     return (
       <>
@@ -25,18 +20,18 @@ class UserPage extends React.Component {
           }}
         >
           <span className="mask bg-gradient-default opacity-8" />
-          <Container className="d-flex align-items-center" fluid className="mb-5">
+          <Container className="d-flex align-items-center mb-5" fluid >
             <Row className="mb-5">
               <Col >
-              <div style={{position:"relative", display:"block", top:"-150px",fontWeight:"bold"}}>
-                <h1 className=" text-white">Hello ADMIN</h1>
+              <div style={{position:"relative", display:"block", top:"-150px",fontWeight:"bold"}} className="yoo">
+                <h1 className="text-white">Hello ADMIN</h1>
                 <p className="text-black mt-0 mb-5">
                   Email :anantgupta888@gmail.com
                 </p>
  </div>
 
               </Col>
-              <div style={{position:"absolute",bottom:"435px"}}>
+              <div style={{position:"relative",right:"269px",bottom:"70px"}} className="yo">
               <UserModal/>
             </div>
             </Row>

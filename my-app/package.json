@@ -66,5 +66,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@iconify-icons/emojione": "^1.1.0",
+    "@iconify-icons/emojione-monotone": "^1.1.0",
+    "@iconify-icons/flat-color-icons": "^1.1.0",
+    "@iconify-icons/noto": "^1.1.0",
+    "@iconify/react": "^1.1.3"
   }
 }

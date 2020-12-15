@@ -69,6 +69,13 @@ mobile:this.state.mobile,
   };
   render() {
     return (
+      <div  style={{
+            width:"100%",
+            backgroundImage:
+              "url(" + require("./cover.jpg") + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "center top"
+          }}>>
       <div className="content">
         <NotificationContainer />
                       
@@ -194,6 +201,7 @@ mobile:this.state.mobile,
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+            </div>
             </div>
     );
   }

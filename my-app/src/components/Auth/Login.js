@@ -66,6 +66,13 @@ class Login extends Component {
     return (
       <>
         <NotificationContainer />
+        <div  style={{
+            width:"100%",
+            backgroundImage:
+              "url(" + require("./cover.jpg") + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "center top"
+          }}>>
         <div className="col-sm-1 col-md-2"></div>
         <MDBContainer className="p-0 col-sm-10 col-md-8">
           <MDBRow style={{ marginTop: 20 }}>
@@ -112,6 +119,7 @@ class Login extends Component {
           </MDBRow>
         </MDBContainer>
         <div className="col-sm-1 col-md-2"></div>
+        </div>
       </>
     );
   }

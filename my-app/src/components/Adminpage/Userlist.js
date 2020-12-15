@@ -119,7 +119,7 @@ export default class Userlist extends Component<any, any> {
           <div>
             <QRCode
               id={row._id}
-              value={JSON.stringify(row._id)}
+              value={row._id}
               size={100}
               level={"H"}
               includeMargin={true}
@@ -127,9 +127,11 @@ export default class Userlist extends Component<any, any> {
             <a
               onClick={() => {
                 const canvas = document.getElementById(row._id);
+                canvas.size="500";
                 const pngUrl = canvas
                   .toDataURL("image/png")
                   .replace("image/png", "image/octet-stream");
+
                 let downloadLink = document.createElement("a");
                 downloadLink.href = pngUrl;
                 downloadLink.download = row.name + ".png";

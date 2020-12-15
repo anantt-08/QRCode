@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as s from './Sidebar.styles';
 

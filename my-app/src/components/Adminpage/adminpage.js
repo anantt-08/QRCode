@@ -9,7 +9,6 @@ import {
 import * as s from './App.styles';
 import Sidebar from '../Home/components/Sidebar/Sidebar';
 import * as Palette from '../Home/colors';
-import { Link } from 'react-router-dom';
 
 const AdminPage = () => {
   const [userlist, setUserlist] = useState([]);

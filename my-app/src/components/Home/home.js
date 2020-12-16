@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { Link } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'; 
 import UserModal from './userModal';
 import Homepage from "./userpage";
+import Relativepage from "./relativepage";
+import FrontPage from "./index.js";
+import axios from 'axios';
 import {
   Card,
   CardHeader,
@@ -13,8 +18,10 @@ import {
   Row,
   Col
 } from "reactstrap";
-//  import { MDBBtn
-// } from "mdbreact";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import "./homestyle.css";
 import UserHeader from "./UserHeader";
 
@@ -23,8 +30,87 @@ class Home extends Component {
   constructor(props)
   {
     super(props)
-   console.log(props)
+   this.state={
+      date:null,
+      birth:null,
+      startDate: null,
+      time:"select",
+      name:"",
+      mobile:"",
+      qrcode:[],
+      already:true,
+      main:""
+         }
   }
+
+  componentDidMount(){
+    this.setState({
+      main:this.props.id
+    })
+  }
+  handleForm = e => {
+    e.preventDefault();
+     if(this.state.time==='select')
+    {
+        NotificationManager.warning("Please Select Time Slot");
+        return false;
+    }
+    const data = {
+      name: this.state.name,
+      birth:this.state.date,
+mobile:this.state.mobile,
+time:this.state.time,
+main:this.state.main
+    };
+    axios
+    .post("http://localhost:9000/api/relatives/register", data)
+    .then(result => {
+      NotificationManager.success(result.data.msg);
+      this.setState({qrcode:[result.data.user]})
+      this.setState({already:false})
+    })
+    .catch(err => {
+      if (err.response && err.response.status === 400){
+        NotificationManager.error(err.response.data.msg);
+        if(err.response.data.user!=undefined){
+          this.setState({qrcode:[err.response.data.user]})
+          this.setState({already:true})
+        }
+        else{
+           this.setState({qrcode:[]})
+        }
+      }
+      else{
+        NotificationManager.error("Something Went Wrong");
+      this.setState({ errors: err.response })
+      this.setState({qrcode:[]})
+    }
+    });
+};
+
+  getPickerValue = (value) => {
+    if(value!=null){
+   let A=value.toString().split(" ").slice(1, 4).join(" ")
+    this.setState({date:A})
+ }
+   else{
+    this.setState({date:null})
+    }
+    this.setState({birth:value});
+  }
+
+  handleSelect=(e)=>{
+    console.log(e);
+    this.setState({
+      time:e
+    })
+  }
+  handleInput = e => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value });
+  };
   render() {
     if (this.props.loggedIn && !this.props.admin) {
       return (
@@ -49,12 +135,12 @@ class Home extends Component {
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">Relative"s QR CODE</h3>
+                      <h3 className="mb-0">Relative's QR CODE</h3>
                     </Col>
                   </Row>
                 </CardHeader>
                 <CardBody >
-                  <Form>
+                  <Form onSubmit={this.handleForm}>
                     <h6 className="heading-small text-muted mb-4">
                       Relative Information
                     </h6>
@@ -69,8 +155,10 @@ class Home extends Component {
                               Username
                             </label>
                             <Input
+                              onChange={this.handleInput} 
                               className="form-control-alternative"
                               id="name"
+                              name="name"
                               placeholder="Username"
                               type="text"
                             />
@@ -86,6 +174,8 @@ class Home extends Component {
                               Mobile Number
                             </label>
                             <Input
+                            name="mobile"
+                             onChange={this.handleInput} 
                               className="form-control-alternative"
                               id="mobile"
                               placeholder="MobileNo."
@@ -95,22 +185,66 @@ class Home extends Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col lg="12">
+                        <Col lg="6">
                         <FormGroup>
-                            <label
+                             <label
                               className="form-control-label"
-                              htmlFor="input-email"
+                           
                             >
-                              Email address
+                             Date Of Visit
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="email"
-                              placeholder="Type Email"
-                              type="email"
-                            />
+                            <DatePicker
+            required
+            dateFormat="dd/MM/yyyy"
+            isClearable={true}
+            className="startDate"
+            placeholderText="Select Date Of Visit"
+            fixedHeight={true}
+            minDate={Date.now()}
+            tetherConstraints={ [] }
+            popperPlacement="right-top"
+            popperModifiers={{
+             flip: {
+               enabled: false
+             },
+             preventOverflow: {
+               enabled: true,
+               escapeWithReference: false
+             }
+           }}
+            selected={this.state.birth} onChange={this.getPickerValue} 
+           selectsStart
+            startDate={this.state.startDate}
+          />
                           </FormGroup>
                           
+                        </Col>
+                        <Col lg="6">
+                        <FormGroup>
+                             <label
+                              className="form-control-label m-0 p-0"
+                           
+                            >
+                        
+                             Time Slot For Visit
+                            </label>
+                         <DropdownButton
+      alignRight
+      title={this.state.time}
+      id="dropdown-menu-align-right"
+      onSelect={this.handleSelect}
+      size="sm"
+        >
+              <Dropdown.Item eventKey="Morning Slot-  [7AM-12PM]">Morning Slot-  [7AM-12PM]</Dropdown.Item>
+               <Dropdown.Divider />
+              <Dropdown.Item eventKey="Afternoon Slot-  [12PM-5PM]">Afternoon Slot-  [12PM-5PM]</Dropdown.Item>
+               <Dropdown.Divider />
+              <Dropdown.Item eventKey="Evening Slot-  [5PM-9PM]">Evening Slot-  [5PM-9PM]</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="Night Slot-  [9PM-12AM]">Night Slot-  [9PM-12AM]</Dropdown.Item>
+      </DropdownButton>
+
+                          </FormGroup>
                         </Col>
                       </Row>
                     </div>
@@ -119,6 +253,7 @@ class Home extends Component {
                     </div>
                     <div className="col-5 ">
                        <Input 
+                             className="btn-success"
                               id="input"
                               type="submit"
                             />
@@ -129,6 +264,8 @@ class Home extends Component {
                 </CardBody>
               </Card>
             </div>
+            {this.state.qrcode.length == 0 ? <div></div> :<Relativepage id= {this.state.qrcode[0]._id } name={this.state.qrcode[0].name} already={this.state.already}/>  
+             }
           </div>
         </div >
       </>
@@ -145,7 +282,8 @@ class Home extends Component {
       return (
   <>
     <ScrollToTop />
-        <div> <h1>Welcome To RBC</h1>
+        <div> 
+        <FrontPage />
          <div className="footer">
   <div id="button"></div>
 <div id="container">

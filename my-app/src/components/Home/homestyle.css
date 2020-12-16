@@ -5,6 +5,20 @@ body{
   padding-top: 66px; 
 }
 
+.dropdown-toggle {
+    margin-top: 36px;
+    min-width: 200px;
+    background-color: white;
+    color: darkslategrey;
+}
+
+.currency-dropdown {
+    max-height: 350px;
+    overflow-y: scroll;
+    min-width: 300px;
+
+}
+
 /* -------------------------- */
 footer {
   bottom: 0;

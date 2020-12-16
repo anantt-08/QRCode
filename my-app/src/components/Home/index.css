@@ -1,0 +1,109 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#myVideo{
+    /* Video by Pressmaster from Pexels */
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+header nav{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding-top: 0.75rem;
+}
+
+header nav,
+header nav a{
+    color: white;
+    text-decoration: none;
+}
+
+nav .logo{
+    float: left;
+}
+
+nav ul{
+    float: right;
+}
+
+nav li{
+    display: inline-block;
+}
+
+nav .logo{
+    font-size: 2rem;
+    margin-left: 5rem;
+    border: 1px solid white;
+    border-radius: 15%;
+    padding: 0.25rem;
+    background-color: rgb(7, 4, 53);
+}
+
+nav a{
+    font-size: 1.5rem;
+    margin-right: 5rem;
+    padding-bottom: 0.25rem;
+}
+
+nav a:hover{
+    border-bottom: 0.25rem solid rgb(52, 40, 219);
+}
+
+header div{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: fit-content;
+    color:white;
+    text-shadow: 0 0 10px black;
+    text-align: center;
+}
+
+header div h1{
+    font-size: 3rem;
+    margin-bottom: 5px;
+}
+
+header div p{
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+}
+
+header div a{
+    display: inline-block;
+    font-size: 1.25rem;
+    padding: 13px 15px;
+    color: white;
+    border: 1px solid white;
+    background-image: linear-gradient(#051018, rgb(0, 162, 255), #051018);
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+header div a:hover{
+    background-image: linear-gradient(rgb(0, 162, 255), rgb(6, 25, 194), rgb(0, 162, 255));
+}
+
+section{
+    background-color: white;
+    color: black;
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+    padding: 15px 20px;
+    line-height: 30px;
+}
+
+section:nth-child(2n){
+    background-color: #051018;
+    color: white;
+}

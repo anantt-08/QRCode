@@ -77,7 +77,8 @@ router.post("/register", (req, res) => {
                     success: true,
                     msg: "Email Send to verification to ADMIN",
                 });
-            });
+            })
+             .catch((err) => next(err));
         });
 
     });
@@ -293,6 +294,7 @@ router.put(
                 result.name +
                 "</h3>\
                 YOU can Now Log In<br/>\
+                Login To Check Your Generated QR CODE<br/>\
             </p>",
         };
 

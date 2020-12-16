@@ -26,11 +26,6 @@ const UserSchema = new Schema({
      type: String,
      required: true
  },
-  qrcode:{
-    type:String,
-    default:""
-  }
- ,
     canLogin: {
         type: Boolean,
         default: false

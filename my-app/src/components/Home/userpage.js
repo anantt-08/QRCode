@@ -1,19 +1,6 @@
 import React ,{Component} from 'react';
 import QRCode from "qrcode.react";
-import Alert from 'react-bootstrap/Alert'
-    // function RenderMenuItem ({dish}) {
-    //     return (
-    //       <Link to={`/menu/${dish._id}`} // activeClassName="active"
-    //       >
-    //         <Card> 
-    //              <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
-    //             <CardImgOverlay>
-    //             <CardTitle>{dish.name}</CardTitle>
-    //             </CardImgOverlay>
-    //         </Card>
-    //         </Link>
-    //     );
-    // }
+import Alert from '@material-ui/lab/Alert';
 
 class Homepage extends Component {
 
@@ -59,8 +46,7 @@ const yoho = () =>{
 }
     
     return (    
-        <div>
-          
+        <div>          
          <QRCode
     id={this.props.id}
     value={this.props.id}
@@ -72,8 +58,8 @@ const yoho = () =>{
   />
   <br /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
   <u><a onClick={DownloadQr} style={{fontWeight:"bold",fontSize:"20px",color:"brown"}}>Download QRCode</a></u>
-<Alert variant="danger" className="m-0">
-    <span style={{color:"red",fontSize:"25px"}}>*</span>DO Not Share Your QRCode With Anyone!
+<Alert variant="filled" severity="error" className="m-2">
+    DO Not Share Your QRCode With Anyone!
   </Alert>
   </div>
      

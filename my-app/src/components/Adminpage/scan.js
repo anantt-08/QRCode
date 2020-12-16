@@ -113,8 +113,9 @@ class Scan extends Component {
   const menuItems = [
     {name: 'Home', to: '/home', icon: '/icons/home.svg' },
     {name: 'Scan', to: '/admin/scan', icon: '/icons/about.svg'},
+    {name: "Relative's Scan", to: '/admin/rscan', icon: '/icons/about.svg' },
     {name: 'User List', to: '/admin/users', icon: '/icons/blog.svg',  },
-    {name: 'Pending REQ', to: '/admin/admin', icon: '/icons/destinations.svg' }
+    {name: "Pending Request's", to: '/admin/admin', icon: '/icons/destinations.svg' }
   ];
    const previewStyle = {
             height: 240,
@@ -164,6 +165,8 @@ class Scan extends Component {
             backgroundPosition: "center top"
           }}>>
      <div style={{postion:"relative",top:"50px",left:"100px"}}>
+
+          <h1 style={{color:"rgb(176, 30, 149)"}}><i><b>Residence Of Ram Bagh Colony :--</b></i></h1>
           {this.state.src=="" ? <div></div> : 
           <div  >
    {this.state.src=="tick.png" ?   

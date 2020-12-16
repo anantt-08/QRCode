@@ -67,6 +67,7 @@ class Login extends Component {
       <>
         <NotificationContainer />
         <div  style={{
+          height: '100%', position: 'absolute', left: '0px', overflow: 'hidden',
             width:"100%",
             backgroundImage:
               "url(" + require("./cover.jpg") + ")",

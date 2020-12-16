@@ -17,7 +17,8 @@ import AdminPage from "./components/Adminpage/adminpage";
 import Userlist from "./components/Adminpage/Userlist";
 import ErrorS from "./components/ErrorPage";
 import 'react-notifications/lib/notifications.css';
-import Scan from "./components/Adminpage/scan"
+import Scan from "./components/Adminpage/scan";
+import Rscan from "./components/Adminpage/rscan";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <GuestRoute path="/change-password/:slug" component={ResetPassword} />
           <AuthRoute path="/home" exact component={Home} />
           <PrivateRoute path="/admin" exact component={Home} />
+          <PrivateRoute path="/admin/rscan" exact component={Rscan} />
           <PrivateRoute path="/admin/scan" exact component={Scan} />
           <PrivateRoute path="/admin/admin" exact component={AdminPage} />
             <PrivateRoute path="/admin/users" exact component={Userlist} />

@@ -73,8 +73,9 @@ export default class Userlist extends Component<any, any> {
   const menuItems = [
     {name: 'Home', to: '/home', icon: '/icons/home.svg' },
     {name: 'Scan', to: '/admin/scan', icon: '/icons/about.svg'},
+    {name: "Relative's Scan", to: '/admin/rscan', icon: '/icons/about.svg' },
     {name: 'User List', to: '/admin/users', icon: '/icons/blog.svg',  },
-    {name: 'Pending REQ', to: '/admin/admin', icon: '/icons/destinations.svg' }
+    {name: "Pending Request's", to: '/admin/admin', icon: '/icons/destinations.svg' }
   ];
 
   const fonts = {

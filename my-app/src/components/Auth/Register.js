@@ -4,9 +4,7 @@ import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "./styles.css";
 import "react-datepicker/dist/react-datepicker.css";
-// CSS Modules, react-datepicker-cssmodules.css// 
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'; 
-import "react-datepicker/dist/react-datepicker.css";
 import { MDBContainer, MDBRow, MDBCol, MDBInput , MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBirthdayCake } from '@fortawesome/free-solid-svg-icons'
@@ -20,7 +18,8 @@ class Register extends Component {
       startDate: null,
       email: "",
       password: "",
-      house:"",mobile:"",occupation:"",birth:null,
+      house:"",mobile:"",occupation:"",
+      birth:null,
       password_confirmation: "",
       errors: {}
     };
@@ -57,8 +56,13 @@ mobile:this.state.mobile,
     });
 };
   getPickerValue = (value) => {
-   let A=value.toString().split(" ").slice(1, 5).join(" ")
+    if(value!=null){
+   let A=value.toString().split(" ").slice(1, 4).join(" ")
     this.setState({date:A})
+ }
+    else{
+    this.setState({date:null})
+    }
     this.setState({birth:value});
   }
   handleInput = e => {
@@ -70,6 +74,7 @@ mobile:this.state.mobile,
   render() {
     return (
       <div  style={{
+             height: '100%', position: 'absolute', left: '0px', overflow: 'hidden',
             width:"100%",
             backgroundImage:
               "url(" + require("./cover.jpg") + ")",
@@ -144,7 +149,7 @@ mobile:this.state.mobile,
                                  <DatePicker
             required
              showTimeSelect
-            dateFormat="dd-MM-yyyy"
+            dateFormat="dd/MM/yyyy HH:mm:ss"
             isClearable={true}
             placeholderText="Select Your Day"
             fixedHeight={true}

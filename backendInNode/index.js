@@ -57,7 +57,9 @@ mongoose.connect(db, {
 // });
 // Bring in the Users route
 const users = require('./routes/api/users');
+const relatives=require("./routes/api/relatives");
 app.use('/api/users', users);
+app.use('/api/relatives', relatives);
 
 // console.log(app);
 

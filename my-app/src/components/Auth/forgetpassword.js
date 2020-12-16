@@ -42,6 +42,7 @@ export default class forgetpassword extends Component {
     render() {
         return (
           <div  style={{
+             height: '100%', position: 'absolute', left: '0px', overflow: 'hidden',
             width:"100%",
             backgroundImage:
               "url(" + require("./cover.jpg") + ")",

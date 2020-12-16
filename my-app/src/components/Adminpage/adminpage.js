@@ -95,8 +95,9 @@ const AdminPage = () => {
   const menuItems = [
     {name: 'Home', to: '/home', icon: '/icons/home.svg' },
     {name: 'Scan', to: '/admin/scan', icon: '/icons/about.svg'},
+    {name: "Relative's Scan", to: '/admin/rscan', icon: '/icons/about.svg' },
     {name: 'User List', to: '/admin/users', icon: '/icons/blog.svg',  },
-    {name: 'Pending REQ', to: '/admin/admin', icon: '/icons/destinations.svg' }
+    {name: "Pending Request's", to: '/admin/admin', icon: '/icons/destinations.svg' }
   ];
 
   const fonts = {
@@ -114,7 +115,7 @@ const AdminPage = () => {
         fonts={fonts}
         colorPalette={Palette[`${colorr}`]
       }
-       SELECTED="Pending REQ"
+       SELECTED="Pending Request's"
       />  
       <div className="p-4" style={{width:"100%"}}>
         <MDBTable className="py-3" hover>
